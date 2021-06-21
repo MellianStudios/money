@@ -1,6 +1,6 @@
 ## This process is not meant for production
 ### Skipping or changing order of steps may result in unexpected and/or unsupported errors
-#### 1. php artisan update
+#### 1. composer update
 #### 2. copy .env.example (linux/mac: cp .env.example .env windows: copy .env.example .env)
 #### 3. php artisan key:generate
 #### 4. configure pusher credentials according to those sent in email
