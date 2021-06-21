@@ -105,9 +105,12 @@ export default {
                 }
             }
 
-            this.labels.shift();
-            this.bids.shift();
-            this.asks.shift();
+            if (this.labels.length > 19) {
+                this.labels.shift();
+                this.bids.shift();
+                this.asks.shift();
+            }
+
 
             this.labels.push(moment(new Date(event.currency_prices[this.pair.id].created_at)).format('DD.MM.YYYY HH:mm:ss'));
             this.bids.push(event.currency_prices[this.pair.id].bid);

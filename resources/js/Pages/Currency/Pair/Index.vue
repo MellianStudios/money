@@ -14,9 +14,11 @@
                     </tr>
                     <tr v-for="pair in pairs" class="h-14 dark:hover:bg-gray-500 hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t text-center">
-                            <span class="px-2 py-1.5">
-                                {{ pair.base_currency.short + '/' + pair.target_currency.short }}
-                            </span>
+                            <inertia-link class="px-2 py-1.5" :href="route('currency_pairs.show', pair.id)">
+                                <span class="px-2 py-1.5">
+                                    {{ pair.base_currency.short + '/' + pair.target_currency.short }}
+                                </span>
+                            </inertia-link>
                         </td>
                         <td class="border-t text-center">
                             <span class="px-2 py-1.5">

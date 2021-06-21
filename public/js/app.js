@@ -17675,6 +17675,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -17724,11 +17727,6 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  computed: {
-    chart_data: function chart_data() {
-      return this.chart_data;
-    }
-  },
   created: function created() {
     var _this = this;
 
@@ -17759,33 +17757,32 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
 
-      _this.labels.shift();
+      if (_this.labels.length > 19) {
+        _this.labels.shift();
 
-      _this.bids.shift();
+        _this.bids.shift();
 
-      _this.asks.shift();
+        _this.asks.shift();
+      }
 
-      _this.labels.push(event.currency_prices[_this.pair.id].created_at);
+      _this.labels.push(moment__WEBPACK_IMPORTED_MODULE_1___default()(new Date(event.currency_prices[_this.pair.id].created_at)).format('DD.MM.YYYY HH:mm:ss'));
 
       _this.bids.push(event.currency_prices[_this.pair.id].bid);
 
       _this.asks.push(event.currency_prices[_this.pair.id].ask);
 
+      _this.createChart();
+
       _this.currency_data = event.currency_prices;
     });
   },
   mounted: function mounted() {
-    var ctx = document.getElementById('chart');
-    new (chart_js__WEBPACK_IMPORTED_MODULE_0___default())(ctx, this.chart_data);
+    this.createChart();
   },
   methods: {
-    renderChart: function renderChart() {
-      this.renderChart(this.chart_data);
-    }
-  },
-  watch: {
-    data: function data() {
-      this._chart.destroy();
+    createChart: function createChart() {
+      var ctx = document.getElementById('chart');
+      new (chart_js__WEBPACK_IMPORTED_MODULE_0___default())(ctx, this.chart_data);
     }
   }
 });
@@ -17916,10 +17913,24 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_inertia_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("inertia-link");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_5, [_hoisted_6, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.pairs, function (pair) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("tr", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(pair.base_currency["short"] + '/' + pair.target_currency["short"]), 1
-    /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.currency_data !== null ? $data.currency_data[pair.id].last : pair.latest_price.last), 1
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("tr", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
+      "class": "px-2 py-1.5",
+      href: _ctx.route('currency_pairs.show', pair.id)
+    }, {
+      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(pair.base_currency["short"] + '/' + pair.target_currency["short"]), 1
+        /* TEXT */
+        )];
+      }),
+      _: 2
+      /* DYNAMIC */
+
+    }, 1032
+    /* PROPS, DYNAMIC_SLOTS */
+    , ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.currency_data !== null ? $data.currency_data[pair.id].last : pair.latest_price.last), 1
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.currency_data !== null ? $data.currency_data[pair.id].bid : pair.latest_price.bid), 1
     /* TEXT */
