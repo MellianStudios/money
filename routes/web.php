@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CurrencyPairController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,3 +24,6 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/currency-pairs', [CurrencyPairController::class, 'index'])->name('currency_pairs.index');
+Route::get('/currency-pairs/{id}', [CurrencyPairController::class, 'show'])->name('currency_pairs.show');
